@@ -116,7 +116,7 @@
                             'type' => 'group',
                             'class' => 'last',
                             'title' => __('Choose columns to show'),
-                            'fa-icon' => 'columns',
+                            'text' => __('Manage Columns'),
                             'children' => $columnsMenu,
                         ),
                     ),
