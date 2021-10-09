@@ -48,7 +48,7 @@
                     'label' => __('Event Info'),
                     'class' => 'input span6',
                     'type' => 'text',
-                    'placeholder' => __('Quick Event Description or Tracking Info')
+                    'placeholder' => __('Quick Event Description or Tracking Info.')
                 ),
                 array(
                     'field' => 'extends_uuid',

@@ -1,16 +1,16 @@
 <?php
 $fullTitle = [
     'local' => [
-        'main' => __('Local organisations'),
-        'extra' => __(', both local and remote'),
+        'main' => __('Local Organisations'),
+        'extra' => __(', Both Local and Remote'),
     ],
     'external' => [
-        'main' => __('Known remote organisations'),
-        'extra' => __(' on other instances'),
+        'main' => __('Known Remote Organisations'),
+        'extra' => __(' on Other Instances'),
     ],
     'all' => [
         'main' => __('All organisations'),
-        'extra' => __(' having a presence on this instance'),
+        'extra' => __(' Having a Presence on This Instance'),
     ]
     ];
 

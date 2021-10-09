@@ -42,7 +42,7 @@ echo $this->element('genericElements/Form/genericForm', [
     'data' => [
         'description' => false,
         'model' => 'Cerebrate',
-        'title' => $edit ? __('Edit Cerebrate connection') : __('Add Cerebrate connection'),
+        'title' => $edit ? __('Edit Cerebrate connection') : __('Add Cerebrate Connection'),
         'fields' => $fields,
         'submit' => [
             'action' => $this->request->params['action'],

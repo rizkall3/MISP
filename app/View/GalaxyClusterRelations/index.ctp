@@ -111,7 +111,7 @@
                 ),
             ),
             'title' => __('Galaxy Cluster Relationships Index'),
-            'description' => __('List all relationships between Galaxy Clusters'),
+            'description' => __('List all relationships between Galaxy Clusters.'),
             'actions' => array(
                 array(
                     'title' => 'Edit',

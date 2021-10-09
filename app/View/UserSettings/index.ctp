@@ -76,7 +76,7 @@
                     'data_path' => 'UserSetting.restricted'
                 )
             ),
-            'title' => __('User settings management'),
+            'title' => __('User Settings Management'),
             'description' => __('Manage the individual user settings.'),
             'actions' => array(
                 array(

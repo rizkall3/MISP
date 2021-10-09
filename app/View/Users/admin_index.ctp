@@ -224,7 +224,7 @@
                     )
                 )
             ),
-            'title' => __('Users index'),
+            'title' => __('Users Index'),
             'html' => $description,
             'actions' => array(
                 array(

@@ -49,9 +49,9 @@
         ?>
         <div id="page1_content" class="multi-page-form-div tabContent" style="width:544px;">
             <label for="SharingGroupName"><?php echo __('Name');?></label>
-            <input type="text" class="input-xxlarge" placeholder="<?php echo __('Example: Multinational sharing group');?>" id="SharingGroupName">
+            <input type="text" class="input-xxlarge" placeholder="<?php echo __('Example: Multinational sharing group.');?>" id="SharingGroupName">
             <label for="SharingGroupReleasability"><?php echo __('Releasable to');?></label>
-            <input type="text" class="input-xxlarge" placeholder="<?php echo __('Example: Community1, Organisation1, Organisation2');?>" id="SharingGroupReleasability">
+            <input type="text" class="input-xxlarge" placeholder="<?php echo __('Example: Community1, Organisation1, Organisation2.');?>" id="SharingGroupReleasability">
             <label for="SharingGroupDescription"><?php echo __('Description');?></label>
             <textarea class="input-xxlarge" placeholder="<?php echo __('A description of the sharing group.');?>" cols="30" rows="6" id="SharingGroupDescription"></textarea>
             <div style="display:block;">

@@ -60,7 +60,7 @@
                 ),
             ),
             'title' => __('Galaxy Cluster Blocklist Index'),
-            'description' => __('List all galaxy clusters that will be prevented to be created (also via synchronization) on this instance'),
+            'description' => __('List all galaxy clusters that will be prevented to be created (also via synchronization) on this instance.'),
             'actions' => array(
                 array(
                     'title' => 'Edit',

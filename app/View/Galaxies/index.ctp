@@ -60,7 +60,7 @@
                     'data_path' => 'Galaxy.name',
                 ),
                 array(
-                    'name' => __('version'),
+                    'name' => __('Version'),
                     'class' => 'short',
                     'data_path' => 'Galaxy.version',
                 ),
@@ -81,7 +81,7 @@
                     'data_path' => 'Galaxy.enabled',
                 ),
             ),
-            'title' => __('Galaxy index'),
+            'title' => __('Galaxy Index'),
             'actions' => array(
                 array(
                     'url' => '/galaxies/view',

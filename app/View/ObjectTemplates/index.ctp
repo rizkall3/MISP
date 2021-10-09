@@ -1,5 +1,5 @@
 <div class="objectTemplates index">
-    <h2><?php echo __('Object Template index');?></h2>
+    <h2><?php echo __('Object Template Index');?></h2>
     <div class="pagination">
         <ul>
             <?php

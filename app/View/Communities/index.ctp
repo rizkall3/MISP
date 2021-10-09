@@ -68,7 +68,7 @@
                     'data_path_requirement' => 'self_registration'
                 )
             ),
-            'title' => __('Communities index'),
+            'title' => __('Communities Index'),
             'description' => __('You can find a list of communities below that chose to advertise their existence to the general MISP user-base. Requesting access to any of those communities is of course no guarantee of being permitted access, it is only meant to simplify the means of finding the various communities that one may be eligible for. Get in touch with the MISP project maintainers if you would like your community to be included in the list.'),
             'actions' => array(
                 array(
