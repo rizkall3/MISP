@@ -40,7 +40,7 @@
                     'required' => false));
             echo $this->Form->input('org', array(
                     'type' => 'textarea',
-                    'label' => __('Organizaion Search'),
+                    'label' => __('Organization Search'),
                     'div' => 'input clear',
                     'rows' => 2,
                     'class' => 'input-xxlarge'));
