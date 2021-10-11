@@ -13,6 +13,7 @@
             'bootstrap-colorpicker',
             'font-awesome',
             'jquery-ui',
+            'dragtable',
             'chosen.min',
             'main',
             array('print', array('media' => 'print'))
@@ -24,6 +25,7 @@
             'jquery',
             'misp-touch',
             'jquery-ui',
+            'jquery.dragtable'
             'chosen.jquery.min'
         );
         echo $this->element('genericElements/assetLoader', array(
@@ -32,6 +34,12 @@
             'meta' => 'icon'
         ));
     ?>
+    <script type="text/javascript">
+     	$(document).ready(function() {
+     	$('#onlyHeaderTable').dragtable({maxMovingRows:1});
+     	
+     	});
+     	</script>
 </head>
 <body data-controller="<?= h($this->params['controller']) ?>" data-action="<?= h($this->params['action']) ?>">
     <div id="popover_form" class="ajax_popover_form"></div>

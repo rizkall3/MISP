@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover table-condensed">
+<table id="onlyHeaderTable" class="sar-table table-striped table-hover table-condensed table-bordered">
     <tr>
         <?php if ($isSiteAdmin): ?>
             <th>
@@ -44,7 +44,7 @@
         <th class="actions"><?php echo __('Actions');?></th>
     </tr>
     <?php foreach ($events as $event): $eventId = (int)$event['Event']['id']; ?>
-    <tr id="event_<?= $eventId ?>">
+    <tr class = "dnd-moved" id="event_<?= $eventId ?>">
         <?php if ($isSiteAdmin || ($event['Event']['orgc_id'] == $me['org_id'])):?>
         <td style="width:10px;">
             <input class="select" type="checkbox" data-id="<?= $eventId ?>" />

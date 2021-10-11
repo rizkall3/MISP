@@ -28,7 +28,7 @@
         'items' => $items
     ));
     $table = sprintf(
-        '<table class="table table-striped table-hover table-condensed">%s%s</table>',
+        '<table class="table table-striped table-hover table-condensed table-bordered">%s%s</table>',
         $table_header,
         $table_contents
     );

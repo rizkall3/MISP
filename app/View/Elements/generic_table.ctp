@@ -36,7 +36,7 @@
         ));
     }
     $table = sprintf(
-        '<table class="table table-striped table-hover table-condensed">%s%s</table>',
+        '<table class="table table-striped table-bordered table-hover table-condensed">%s%s</table>',
         $table_headers,
         $table_contents
     );

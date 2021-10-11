@@ -23,11 +23,15 @@ echo $this->Html->css('bootstrap-datepicker');
 echo $this->Html->css('bootstrap-timepicker');
 echo $this->Html->css('bootstrap-colorpicker');
 echo $this->Html->css('font-awesome');
+echo $this->Html->css('dragndrop.table.columns');
+echo $this->Html->css('dragtable');
 echo $this->Html->script('jquery');
 echo $this->Html->script('bootstrap');
 echo $this->Html->script('bootstrap-timepicker');
 echo $this->Html->script('bootstrap-datepicker');
 echo $this->Html->script('bootstrap-colorpicker');
+echo $this->Html->script('dragndrop.table.columns?' . $queryVersion);
+echo $this->Html->script('jquery.dragtable.js?' . $queryVersion);
 echo $this->Html->script('misp.js?' . $queryVersion);
 echo $this->Html->script('keyboard-shortcuts.js?' . $queryVersion);
 echo $content_for_layout; ?>
