@@ -19,7 +19,8 @@
           'class' => 'short',
           'data_path' => 'User.email'
         )
-      )
+      ),
+      'title' => __('Saved Searches'),
       'description' => __('Manage the bookmarked searches.'),
       'actions' => array(
         array(
