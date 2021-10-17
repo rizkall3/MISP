@@ -1,8 +1,5 @@
 <?php
   echo '<div class="index">';
-  echo '<h2>';
-  echo __('Saved Searches');
-  echo '</h2>';
   echo $this->element('/genericElements/IndexTable/index_table', array(
     'data' => array(
       'data' => $data,
@@ -18,6 +15,12 @@
           'sort' => 'User.email',
           'class' => 'short',
           'data_path' => 'User.email'
+        ),
+        array(
+          'name' => __('Link'),
+          'sort' => 'type',
+          'element' => 'json',
+          'data_path' => 'SaveSearches.link'
         )
       ),
       'title' => __('Saved Searches'),
