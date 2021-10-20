@@ -10,7 +10,7 @@ class SaveSearchesController extends AppController
     'recursive' => 0,
     'order' => array(
       'SaveSearches.id' => 'asc'
-    ),
+    )
   );
 
   public function index()

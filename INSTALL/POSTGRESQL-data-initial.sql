@@ -185,6 +185,12 @@ COPY public.logs (id, title, created, model, model_id, action, user_id, change, 
 COPY public.news (id, message, title, user_id, date_created) FROM stdin;
 \.
 
+--
+-- Data for Name: save_searches; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.save_searches (id, user_id, title, value, date_created) FROM stdin;
+\.
 
 --
 -- Data for Name: noticelist_entries; Type: TABLE DATA; Schema: public; Owner: -
@@ -1012,4 +1018,3 @@ SELECT pg_catalog.setval('public.whitelist_id_seq', 1, true);
 --
 -- PostgreSQL database dump complete
 --
-

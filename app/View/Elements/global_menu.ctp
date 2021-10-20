@@ -177,6 +177,10 @@
                 'text' => __('Global Actions'),
                 'children' => array(
                     array(
+                        'text' => __('Save Search'),
+                        'url' => $baseurl . '/SaveSearch'
+                    ),
+                    array(
                         'text' => __('News'),
                         'url' => $baseurl . '/news'
                     ),

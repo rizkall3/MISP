@@ -1135,7 +1135,7 @@ function loadAttributeTags(id) {
         dataType:"html",
         cache: false,
         success:function (data) {
-            $("#Attribute_"+id+"_tr .attributeTagContainer").html(data);
+            $("#Attribute_"+id+".attributeTagContainer").html(data);
         },
         error: xhrFailCallback,
         url: baseurl + "/tags/showAttributeTag/" + id
@@ -2152,6 +2152,10 @@ function runIndexFilter(element) {
 function cancelSearch() {
     $('#quickFilterField').val('');
     $('#quickFilterButton').click();
+}
+
+function openmailto() {
+    window.location='mailto:?subject=Search Query&body=Here is the search query: ' + window.location;
 }
 
 // Deprecated, when possible use runIndexQuickFilterFixed that is cleaner

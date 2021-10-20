@@ -45,6 +45,7 @@
         }
 
         $filterParamsString = implode(' & ', $filterParamsString);
+
         $data = array(
             'children' => array(
                 array(
@@ -116,10 +117,20 @@
                             'type' => 'group',
                             'class' => 'last',
                             'title' => __('Choose columns to show'),
-                            'text' => __('Manage Columns'),
+                            'fa-icon' => 'columns',
                             'children' => $columnsMenu,
                         ),
                     ),
+                ),
+                array(
+                    'children' => array(
+                        array(
+                            'title' => __('EMAIL HERE'),
+                            'id' => 'share_query',
+                            'text' => __('SHARE'),
+
+                        )
+                    )
                 ),
                 array(
                     'type' => 'search',
@@ -129,7 +140,7 @@
                 )
             )
         );
-        if (!$ajax) {
+    if (!$ajax) {
             echo $this->element('/genericElements/ListTopBar/scaffold', array('data' => $data));
         }
         echo $this->element('Events/eventIndexTable');
@@ -155,6 +166,9 @@
         });
         $('#quickFilterButton').click(function() {
             runIndexQuickFilter();
+        });
+        $('#share_query').click(function() {
+            openmailto();
         });
     });
 </script>

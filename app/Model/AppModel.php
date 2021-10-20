@@ -553,6 +553,16 @@ class AppModel extends Model
                     `date_created` int(11) unsigned NOT NULL,
                     PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+                $sqlArray[] = "CREATE TABLE IF NOT EXISTS `save_searches` (
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                    `user_id` int(11) NOT NULL,
+                    `title` text COLLATE utf8_bin NOT NULL,
+                    `value`  COLLATE utf8_bin NOT NULL,
+                    `date_created` int(11) unsigned NOT NULL,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
                 break;
             case '2.4.49':
                 // table: users
@@ -2577,9 +2587,10 @@ class AppModel extends Model
         return true;
     }
 
-    public function publishKafkaNotification($topicName, $data, $action = false) {
-        $kafkaTopic = Configure::read('Plugin.Kafka_' . $topicName . '_notifications_topic');
-        if (Configure::read('Plugin.Kafka_enable') && Configure::read('Plugin.Kafka_' . $topicName . '_notifications_enable') && !empty($kafkaTopic)) {
+    public function publishKafkaNotification($topicName, $data, $action = false)
+    {
+        $kafkaTopic = $this->kafkaTopic($topicName);
+        if ($kafkaTopic) {
             $this->getKafkaPubTool()->publishJson($kafkaTopic, $data, $action);
         }
     }
@@ -3274,5 +3285,24 @@ class AppModel extends Model
             $this->Log = ClassRegistry::init('Log');
         }
         return $this->Log;
+    }
+
+    /**
+     * @param string $name
+     * @return string|null Null when Kafka is not enabled, topic is not enabled or topic is not defined
+     */
+    protected function kafkaTopic($name)
+    {
+        static $kafkaEnabled;
+        if ($kafkaEnabled === null) {
+            $kafkaEnabled = (bool)Configure::read('Plugin.Kafka_enable');
+        }
+        if ($kafkaEnabled) {
+            if (!Configure::read("Plugin.Kafka_{$name}_notifications_enable")) {
+                return null;
+            }
+            return Configure::read("Plugin.Kafka_{$name}_notifications_topic") ?: null;
+        }
+        return null;
     }
 }
