@@ -54,7 +54,7 @@ class SaveSearchController extends AppController
             }
         } else {
             $this->request->data = $this->SaveSearch->read(null, $id);
-            $this->set('savedSearches', $this->requst->data);
+            $this->set('savedSearches', $this->request->data);
         }
         $this->render('add');
     }
