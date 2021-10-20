@@ -1,46 +1,73 @@
 <?php
-App::uses('AppController', 'Controller');
+App::uses('AppController', 'Controller', 'CRUD');
 
-class SaveSearchesController extends AppController
+class SaveSearchController extends AppController
 {
-  public $components = array('Session', 'RequestHandler');
+    public $components = array('Session', 'RequestHandler');
 
-  public $paginate = array(
-    'limit' => 20,
-    'recursive' => 0,
-    'order' => array(
-      'SaveSearches.id' => 'asc'
-    )
-  );
+    public $paginate = array(
+        'limit' => 5,
+        'maxLimit' => 9999,
+        'order' => array(
+            'SaveSearch.id' => 'DESC'
+        ),
+    );
 
-  public function index()
-  {
-      $paginationParams = array('limit', 'page', 'sort', 'direction', 'order');
-      $overrideAbleParams = array('searchid', 'email', 'link');
-      $passedArgs = $this->passedArgs;
-      if (isset($this->request->data)) {
-        if (isset($this->request->data['request'])) {
-            $this->request->data = $this->request->data['request'];
-        }
-        foreach ($this->request->data as $k => $v) {
-            if (substr($k, 0, 6) === 'search' && in_array(strtolower(substr($k, 6)), $overrideAbleParams)) {
-                unset($this->request->data[$k]);
-                $this->request->data[strtolower(substr($k, 6))] = $v;
-            } else if (in_array(strtolower($k), $overrideAbleParams)) {
-                unset($this->request->data[$k]);
-                $this->request->data[strtolower($k)] = $v;
+    public function index()
+    {
+        $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
+        $savedSearches = $this->paginate();
+
+        $this->set('savedSearches', $savedSearches);
+
+        $this->loadModel('User');
+    }
+
+    public function add()
+    {
+        if ($this->request->is('post')) {
+            $this->SaveSearch->create();
+            $this->request->data['SaveSearch']['date_created'] = time();
+            $this->request->data['SaveSearch']['user_id'] = $this->Auth->user('id');
+            if ($this->SaveSearch->save($this->request->data)) {
+                $this->Flash->success(__('Search Query added.'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('The search query could not be added.'));
             }
         }
-        foreach ($overrideAbleParams as $oap) {
-            if (isset($this->request->data[$oap])) {
-                $passedArgs['search' . $oap] = $this->request->data[$oap];
-            }
+    }
+
+    public function edit($id)
+    {
+        $this->SaveSearch->id = $id;
+        if(!$this->SaveSearch->exists()) {
+            throw new NotFoundException('Invalid search query.');
         }
-        foreach ($paginationParams as $paginationParam) {
-            if (isset($this->request->data[$paginationParam])) {
-                $passedArgs[$paginationParam] = $this->request->data[$paginationParam];
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['SaveSearch']['id'] = $id;
+            if ($this->SaveSearch->save($this->request->data)) {
+                $this->Flash->success(__('Search Query updated.'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Flash->error(__('Could not update search query.'));
             }
+        } else {
+            $this->request->data = $this->SaveSearch->read(null, $id);
+            $this->set('savedSearches', $this->requst->data);
         }
-      }
-  }
+        $this->render('add');
+    }
+
+    public function delete($id)
+    {
+        $this->defaultModel = 'SaveSearch';
+        $this->CRUD->delete($id);
+        if ($this->IndexFilter->isRest()) {
+            return $this->restResponsePayload;
+        }
+    }
+
+
+
 }
