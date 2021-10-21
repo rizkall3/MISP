@@ -1,11 +1,11 @@
 <?php
 
-$this->set('menuData', ['menuList' => 'savesearch', 'menuItem' => 'index']);
+$this->set('menuData', ['menuList' => 'privatesavesearch', 'menuItem' => 'index']);
 
 echo $this->element('genericElements/IndexTable/scaffold', [
         'scaffold_data' => [
             'data' => [
-                'data' => $savedSearches,
+                'data' => $privatSavedSearches,
 /*
                 'top_bar' => [
                     'children' => [
@@ -14,12 +14,12 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                           'children' => [
                               [
                                   'active' => $context === 'public',
-                                  'url' => $baseurl . '/SaveSearch/index/list:public',
+                                  'url' => $baseurl . '/PrivateSaveSearch/index/list:public',
                                   'text' => __('Public'),
                               ],
                               [
                                   'active' => $context === 'private',
-                                  'url' => $baseurl . '/SaveSearch/index/list:private',
+                                  'url' => $baseurl . '/PrivateSaveSearch/index/list:private',
                                   'text' => __('Private'),
                               ]
 
@@ -32,7 +32,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 [
                     'name' => __('Id'),
                     'sort' => 'id',
-                    'data_path' => 'SaveSearch.id'
+                    'data_path' => 'PrivateSaveSearch.id'
                 ],
                 [
                     'name' => __('User'),
@@ -42,37 +42,37 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 [
                     'name' => __('Title'),
                     'sort' => 'title',
-                    'data_path' => 'SaveSearch.title'
+                    'data_path' => 'PrivateSaveSearch.title'
                 ],
                 [
                     'name' => __('Value'),
                     'sort' => 'value',
-                    'data_path' => 'SaveSearch.value'
+                    'data_path' => 'PrivateSaveSearch.value'
                 ],
                 [
                     'name' => __('Created at'),
                     'sort' => 'date_created',
-                    'data_path' => 'SaveSearch.date_created',
+                    'data_path' => 'PrivateSaveSearch.date_created',
                     'element' => 'datetime'
                 ],
             ],
-            'title' => empty($ajax) ? __('Saved Searches') : false,
+            'title' => empty($ajax) ? __('Your Saved Searches') : false,
             'pull' => 'right',
             'actions' => [
                 [
-                    'url' => $baseurl . '/SaveSearch/edit',
+                    'url' => $baseurl . '/PrivateSaveSearch/edit',
                     'url_params_data_paths' => [
-                        'SaveSearch.id'
+                        'PrivateSaveSearch.id'
                     ],
                     'icon' => 'edit',
                     'title' => 'Edit Query',
                 ],
                 [
                     'onclick' => sprintf(
-                        'openGenericModal(\'%s/SaveSearch/delete/[onclick_params_data_path]\');',
+                        'openGenericModal(\'%s/PrivateSaveSearch/delete/[onclick_params_data_path]\');',
                         $baseurl
                     ),
-                    'onclick_params_data_path' => 'SaveSearch.id',
+                    'onclick_params_data_path' => 'PrivateSaveSearch.id',
                     'icon' => 'trash',
                     'title' => __('Delete query'),
                 ]

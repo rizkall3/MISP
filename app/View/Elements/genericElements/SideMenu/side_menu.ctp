@@ -1352,6 +1352,25 @@ $divider = $this->element('/genericElements/SideMenu/side_menu_divider');
                     }
                     break;
 
+                case 'privatesavesearch':
+                    echo $this->element('/genericElements/SideMenu/side_menu_link', array(
+                        'url' => $baseurl . '/PrivateSaveSearch/index',
+                        'text' => __('View Your Personal Saved Searches')
+                    ));
+                    if ($isSiteAdmin) {
+                        echo $this->element('/genericElements/SideMenu/side_menu_link', array(
+                            'url' => $baseurl . '/PrivateSaveSearch/add',
+                            'text' => __('Add Search Query')
+                        ));
+                        if ($menuItem === 'edit') {
+                            echo $this->element('/genericElements/SideMenu/side_menu_link', array(
+                                'element_id' => 'edit',
+                                'text' => __('Edit Search Query')
+                            ));
+                        }
+                    }
+                    break;
+
                 case 'galaxies':
                     echo $this->element('/genericElements/SideMenu/side_menu_link', array(
                         'element_id' => 'galaxy_index',

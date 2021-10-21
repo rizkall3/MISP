@@ -554,6 +554,16 @@ class AppModel extends Model
                     PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+                $sqlArray[] = "CREATE TABLE IF NOT EXISTS `private_save_searches` (
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                    `user_id` int(11) NOT NULL,
+                    `title` text COLLATE utf8_bin NOT NULL,
+                    `value`  COLLATE utf8_bin NOT NULL,
+                    `date_created` int(11) unsigned NOT NULL,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+
                 $sqlArray[] = "CREATE TABLE IF NOT EXISTS `save_searches` (
                     `id` int(11) NOT NULL AUTO_INCREMENT,
                     `user_id` int(11) NOT NULL,

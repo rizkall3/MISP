@@ -5476,6 +5476,7 @@ components:
         - "MispObject"
         - "Module"
         - "News"
+        - "PrivateSavedSearches"
         - "SavedSearches"
         - "NoticelistEntry"
         - "Noticelist"

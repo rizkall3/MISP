@@ -390,6 +390,12 @@ class ACLComponent extends Component
                     'delete' => array(),
                     'index' => array('*'),
             ),
+            'privatesavedsearch' => array (
+                    'add' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                    'index' => array('*'),
+            ),
             'noticelists' => array(
                     'delete' => array(),
                     'enableNoticelist' => array(),

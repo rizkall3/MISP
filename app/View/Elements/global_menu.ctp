@@ -181,6 +181,10 @@
                         'url' => $baseurl . '/SaveSearch'
                     ),
                     array(
+                        'text' => __('Private Save Search'),
+                        'url' => $baseurl . '/PrivateSaveSearch'
+                    ),
+                    array(
                         'text' => __('News'),
                         'url' => $baseurl . '/news'
                     ),
