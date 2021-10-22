@@ -5,7 +5,7 @@ $this->set('menuData', ['menuList' => 'privatesavesearch', 'menuItem' => 'index'
 echo $this->element('genericElements/IndexTable/scaffold', [
         'scaffold_data' => [
             'data' => [
-                'data' => $privatSavedSearches,
+                'data' => $privateSavedSearches,
 /*
                 'top_bar' => [
                     'children' => [

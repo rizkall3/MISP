@@ -45,7 +45,7 @@ class PrivateSaveSearchController extends AppController
             throw new NotFoundException('Invalid search query.');
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            $this->request->data['SaveSearch']['id'] = $id;
+            $this->request->data['PrivateSaveSearch']['id'] = $id;
             if ($this->PrivateSaveSearch->save($this->request->data)) {
                 $this->Flash->success(__('Search Query updated.'));
                 $this->redirect(array('action' => 'index'));

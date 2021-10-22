@@ -186,6 +186,13 @@ COPY public.news (id, message, title, user_id, date_created) FROM stdin;
 \.
 
 --
+-- Data for Name: private_save_searches; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.private_save_searches (id, user_id, title, value, date_created) FROM stdin;
+\.
+
+--
 -- Data for Name: save_searches; Type: TABLE DATA; Schema: public; Owner: -
 --
 

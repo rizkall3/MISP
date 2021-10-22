@@ -716,6 +716,39 @@ ALTER SEQUENCE public.news_id_seq OWNED BY public.news.id;
 
 
 ========
+
+--
+-- Name: private_save_searches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.private_save_searches (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    title text NOT NULL,
+    value text NOT NULL,
+    date_created bigint NOT NULL
+);
+
+
+--
+-- Name: private_save_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.private_save_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: private_save_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.private_save_searches_id_seq OWNED BY public.private_save_searches.id;
+========
+
 --
 -- Name: save_searches; Type: TABLE; Schema: public; Owner: -
 --
