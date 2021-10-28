@@ -1351,7 +1351,6 @@ $divider = $this->element('/genericElements/SideMenu/side_menu_divider');
                         }
                     }
                     break;
-
                 case 'privatesavesearch':
                     echo $this->element('/genericElements/SideMenu/side_menu_link', array(
                         'url' => $baseurl . '/PrivateSaveSearch/index',
@@ -1370,7 +1369,6 @@ $divider = $this->element('/genericElements/SideMenu/side_menu_divider');
                         }
                     }
                     break;
-
                 case 'galaxies':
                     echo $this->element('/genericElements/SideMenu/side_menu_link', array(
                         'element_id' => 'galaxy_index',
