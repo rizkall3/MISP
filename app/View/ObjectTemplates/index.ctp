@@ -141,9 +141,10 @@ endforeach; ?>
     </div>
 </div>
 <script type="text/javascript">
+    var passedArgsArray = <?php echo $passedArgs; ?>;
     $(document).ready(function(){
         $('#quickFilterButton').click(function() {
-            runIndexQuickFilter();
+            runIndexQuickFilter(passedArgsArray);
         });
     });
 </script>
