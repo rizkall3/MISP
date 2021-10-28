@@ -3,6 +3,7 @@ App::uses('AppModel', 'Model');
 
 class SaveSearch extends AppModel
 {
+    public $useTable = 'save_searches';
     public $actsAs = array('AuditLog', 'Containable');
 
     public $validate = array(

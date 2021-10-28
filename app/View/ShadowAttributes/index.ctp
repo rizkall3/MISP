@@ -113,9 +113,10 @@
     echo $this->element('/genericElements/SideMenu/side_menu', array('menuList' => 'event-collection', 'menuItem' => 'viewProposals'));
 ?>
 <script type="text/javascript">
+    var passedArgsArray = <?php echo $passedArgs; ?>;
     $(function(){
         $('#quickFilterButton').click(function() {
-            runIndexQuickFilter();
+            runIndexQuickFilter("passedArgsArray");
         });
     });
 </script>

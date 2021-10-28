@@ -8063,7 +8063,7 @@
             "id": true
         },
         "private_save_searches": {
-          "id": true
+            "id": true
         },
         "save_searches": {
             "id": true

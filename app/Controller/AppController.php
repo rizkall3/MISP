@@ -3,7 +3,7 @@ App::uses('ConnectionManager', 'Model');
 App::uses('Controller', 'Controller');
 App::uses('File', 'Utility');
 App::uses('RequestRearrangeTool', 'Tools');
-App::uses('BlowfishConstantPasswordHasher', 'Controller/Component/Auth');
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 /**
  * Application Controller

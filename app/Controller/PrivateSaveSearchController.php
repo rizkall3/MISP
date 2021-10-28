@@ -3,6 +3,7 @@ App::uses('AppController', 'Controller', 'CRUD');
 
 class PrivateSaveSearchController extends AppController
 {
+
     public $components = array('Session', 'RequestHandler');
 
     public $paginate = array(
@@ -15,6 +16,7 @@ class PrivateSaveSearchController extends AppController
 
     public function index()
     {
+
         $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
         $privateSavedSearches = $this->paginate();
 
@@ -67,7 +69,4 @@ class PrivateSaveSearchController extends AppController
             return $this->restResponsePayload;
         }
     }
-
-
-
 }
