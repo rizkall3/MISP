@@ -23,6 +23,7 @@ App::uses('BlowfishConstantPasswordHasher', 'Controller/Component/Auth');
  * @property DeprecationComponent $Deprecation
  * @property RestSearchComponent $RestSearch
  */
+ 
 class AppController extends Controller
 {
     /**
