@@ -165,7 +165,7 @@
             runIndexFilter(this);
         });
         $('#quickFilterButton').click(function() {
-            runIndexQuickFilter();
+            runIndexQuickFilter(passedArgsArray);
         });
         $('#share_query').click(function() {
             openmailto();

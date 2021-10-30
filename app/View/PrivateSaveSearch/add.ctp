@@ -1,4 +1,5 @@
 <?php
+
 $edit = $this->request->params['action'] === 'edit' ? true: false;
 echo $this->element(
     '/genericElements/SideMenu/side_menu',

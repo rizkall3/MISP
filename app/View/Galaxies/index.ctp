@@ -147,7 +147,7 @@
     var passedArgsArray = <?php echo $passedArgs; ?>;
     $(function() {
         $('#quickFilterButton').click(function() {
-            runIndexQuickFilter();
+            runIndexQuickFilter(passedArgsArray);
         });
     });
 </script>

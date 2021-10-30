@@ -318,7 +318,7 @@
             listCheckboxesChecked();
         });
         $('#quickFilterButton').click(function() {
-            runIndexQuickFilter();
+            runIndexQuickFilter(passedArgsArray);
         });
     });
 </script>
