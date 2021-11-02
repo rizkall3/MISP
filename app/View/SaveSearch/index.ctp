@@ -6,7 +6,6 @@ echo $this->element('genericElements/IndexTable/scaffold', [
         'scaffold_data' => [
             'data' => [
                 'data' => $savedSearches,
-/*
                 'top_bar' => [
                     'children' => [
                         [
@@ -14,12 +13,12 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                           'children' => [
                               [
                                   'active' => $context === 'public',
-                                  'url' => $baseurl . '/SaveSearch/index/list:public',
+                                  'url' => $baseurl . '/SaveSearch/index/',
                                   'text' => __('Public'),
                               ],
                               [
                                   'active' => $context === 'private',
-                                  'url' => $baseurl . '/SaveSearch/index/list:private',
+                                  'url' => $baseurl . '/PrivateSaveSearch/index/',
                                   'text' => __('Private'),
                               ]
 
@@ -27,7 +26,6 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         ]
                     ]
                 ],
-*/
                 'fields' => [
                 [
                     'name' => __('Id'),

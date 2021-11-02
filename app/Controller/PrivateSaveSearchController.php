@@ -25,6 +25,7 @@ class PrivateSaveSearchController extends AppController
           $this->paginate['contain'] = array('User' => array('fields' => array('User.id', 'User.email')));
         }
         */
+        $context = 'private';
         $filterData = array(
             'request' => $this->request,
             'paramArray' => array('user_id', 'sort', 'direction', 'page', 'limit'),
@@ -66,7 +67,7 @@ class PrivateSaveSearchController extends AppController
         //$privateSavedSearches = $this->paginate();
 
         $this->set('privateSavedSearches', $privateSavedSearches);
-
+        $this->set('context', empty($context) ? 'null' : $context);
         $this->loadModel('User');
     }
     /* not used (possibly later)

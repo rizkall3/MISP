@@ -3,6 +3,7 @@ App::uses('AppController', 'Controller', 'CRUD');
 
 class SaveSearchController extends AppController
 {
+
     public $components = array('Session', 'RequestHandler');
 
     public $paginate = array(
@@ -15,11 +16,12 @@ class SaveSearchController extends AppController
 
     public function index()
     {
+        $context = 'public';
         $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
         $savedSearches = $this->paginate();
 
         $this->set('savedSearches', $savedSearches);
-
+        $this->set('context', empty($context) ? 'null' : $context);
         $this->loadModel('User');
     }
 
