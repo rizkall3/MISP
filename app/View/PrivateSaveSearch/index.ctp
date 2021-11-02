@@ -6,7 +6,6 @@ echo $this->element('genericElements/IndexTable/scaffold', [
         'scaffold_data' => [
             'data' => [
                 'data' => $privateSavedSearches,
-
                 'top_bar' => [
                     'children' => [
                         [
@@ -27,7 +26,6 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         ]
                     ]
                 ],
-
                 'fields' => [
                 [
                     'name' => __('Id'),

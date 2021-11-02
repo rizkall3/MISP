@@ -11,17 +11,92 @@ class PrivateSaveSearchController extends AppController
         'order' => array(
             'PrivateSaveSearch.id' => 'DESC'
         ),
+        'contain' => array(
+          'User.id',
+          'User.email'
+        )
     );
 
     public function index()
     {
-        $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
-        $privateSavedSearches = $this->paginate();
+        /* Didn't work
+        if (!$this->_isSiteAdmin() && !$this->_isAdmin()) {
+          $this->paginate['contain'] = array('User' => array('fields' => array('User.id', 'User.email')));
+        }
+        */
+        $filterData = array(
+            'request' => $this->request,
+            'paramArray' => array('user_id', 'sort', 'direction', 'page', 'limit'),
+            'named_params' => $this->params['named']
+        );
+        $exception = false;
+        $filters = $this->_harvestParameters($filterData, $exception);
+        $conditons = array();
+        if(!empty($filters['user_id'])) {
+            $conditions['AND'][] = array(
+                'user_id' => $this->Auth->user('id')
+            );
+        }
+
+        $this->paginate['contain'] = array('User' => array('fields' => array('User.id', 'User.email')));
+
+        $conditions['AND'][] = array(
+            'User.id' => $this->Auth->user('id')
+        );
+
+        if ($this->_isRest()) {
+            $params = array(
+                'conditions' => $conditions
+            );
+            if (!empty($filters['page'])) {
+                $params['page'] = $filters['page'];
+                $params['limit'] = $this->paginate['limit'];
+            }
+            if (!empty($filters['limit'])) {
+                $params['limit'] = $filters['limit'];
+            }
+            //$privateSavedSearch = $this
+            return $this->RestResponse->viewData($privateSaveSearches, $this->response->type());
+        } else {
+          $this->paginate['conditions'] = $conditions;
+          $privateSavedSearches = $this->paginate();
+        }
+
+        //$privateSavedSearches = $this->paginate();
 
         $this->set('privateSavedSearches', $privateSavedSearches);
 
         $this->loadModel('User');
     }
+    /* not used (possibly later)
+    public function view($id)
+    {
+        // check if the ID is valid and whether a user setting with the given ID exists
+        if (empty($id) || !is_numeric($id)) {
+            throw new InvalidArgumentException(__('Invalid ID passed.'));
+        }
+        $privateSaveSearch = $this->privateSavedSearches->find('first', array(
+            'recursive' => -1,
+            'conditions' => array(
+                'PrivateSaveSearch.id' => $id
+            ),
+            'contain' => array('User.id', 'User.org_id')
+        ));
+        if (empty($privateSaveSearch)) {
+            throw new NotFoundException(__('Invalid bookmarks page.'));
+        }
+        $checkAccess = $this->UserSetting->checkAccess($this->Auth->user(), $privateSaveSearch);
+        if (!$checkAccess) {
+            throw new NotFoundException(__('Invalid bookmarks page.'));
+        }
+        if ($this->_isRest()) {
+            unset($privateSaveSearch['User']);
+            return $this->RestResponse->viewData($privateSaveSearch, $this->response->type());
+        } else {
+            $this->set($data, $privateSaveSearch);
+        }
+    }
+    */
 
     public function add()
     {
