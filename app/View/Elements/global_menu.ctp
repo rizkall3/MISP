@@ -178,11 +178,11 @@
                 'children' => array(
                     array(
                         'text' => __('Save Search'),
-                        'url' => $baseurl . '/SaveSearch'
+                        'url' => $baseurl . '/SaveSearch/index'
                     ),
                     array(
                         'text' => __('Private Save Search'),
-                        'url' => $baseurl . '/PrivateSaveSearch'
+                        'url' => $baseurl . '/PrivateSaveSearch/index'
                     ),
                     array(
                         'text' => __('News'),

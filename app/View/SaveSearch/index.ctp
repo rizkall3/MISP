@@ -13,12 +13,12 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                           'children' => [
                               [
                                   'active' => $context === 'public',
-                                  'url' => $baseurl . '/SaveSearch/index/',
+                                  'url' => $baseurl . '/SaveSearch/index',
                                   'text' => __('Public'),
                               ],
                               [
                                   'active' => $context === 'private',
-                                  'url' => $baseurl . '/PrivateSaveSearch/index/',
+                                  'url' => $baseurl . '/PrivateSaveSearch/index',
                                   'text' => __('Private'),
                               ]
 
