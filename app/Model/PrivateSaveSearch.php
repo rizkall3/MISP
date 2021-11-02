@@ -20,4 +20,5 @@ class PrivateSaveSearch extends AppModel
     );
 
     public $belongsTo = 'User';
+
 }

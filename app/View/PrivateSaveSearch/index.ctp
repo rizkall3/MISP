@@ -6,6 +6,10 @@ echo $this->element('genericElements/IndexTable/scaffold', [
         'scaffold_data' => [
             'data' => [
                 'data' => $privateSavedSearches,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d5dd89a336515aedfc53c5f17aa26c552fd4841
                 'top_bar' => [
                     'children' => [
                         [
@@ -26,6 +30,10 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         ]
                     ]
                 ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d5dd89a336515aedfc53c5f17aa26c552fd4841
                 'fields' => [
                 [
                     'name' => __('Id'),

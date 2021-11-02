@@ -3,6 +3,7 @@ App::uses('AppController', 'Controller', 'CRUD');
 
 class PrivateSaveSearchController extends AppController
 {
+
     public $components = array('Session', 'RequestHandler');
 
     public $paginate = array(
@@ -19,6 +20,7 @@ class PrivateSaveSearchController extends AppController
 
     public function index()
     {
+<<<<<<< HEAD
         /* Didn't work
         if (!$this->_isSiteAdmin() && !$this->_isAdmin()) {
           $this->paginate['contain'] = array('User' => array('fields' => array('User.id', 'User.email')));
@@ -63,6 +65,11 @@ class PrivateSaveSearchController extends AppController
         }
 
         //$privateSavedSearches = $this->paginate();
+=======
+
+        $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
+        $privateSavedSearches = $this->paginate();
+>>>>>>> 9d5dd89a336515aedfc53c5f17aa26c552fd4841
 
         $this->set('privateSavedSearches', $privateSavedSearches);
 
@@ -142,7 +149,4 @@ class PrivateSaveSearchController extends AppController
             return $this->restResponsePayload;
         }
     }
-
-
-
 }
