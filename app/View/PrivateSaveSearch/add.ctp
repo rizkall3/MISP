@@ -1,38 +1,73 @@
 <?php
 
 $edit = $this->request->params['action'] === 'edit' ? true: false;
-echo $this->element(
-    '/genericElements/SideMenu/side_menu',
-    [
-        'menuList' => 'privatesavesearch',
-        'menuItem' => $edit ? 'edit' : 'add'
-    ]
-);
+if (!$edit) {
+    echo $this->element('genericElements/Form/genericForm', [
+        'data' => [
+            'title' => __('Add Search Query'),
+            'fields' => [
+                [
+                    'field' => 'title',
+                    'label' => __('Title'),
+                    'type' => 'text',
+                    'error' => ['escape' => false],
+                    'div' => 'input clear',
+                    'class' => 'input-xlarge',
+                ],
+                [
+                    'field' => 'value',
+                    'label' => __('Value'),
+                    'type' => 'text',
+                    'error' => ['escape' => false],
+                    'div' => 'input clear',
+                    'class' => 'input-xlarge'
+                ]
+            ],
+            'submit' => [
+                [
+                  'action' => $this->request->params['action'],
+                  'ajaxSubmit' => 'submitGenericFormInPlace();'
+                ]
 
-echo $this->element('genericElements/Form/genericForm', [
-    'data' => [
-        'title' => $edit ? __('Edit Search Query') : __('Add Search Query'),
-        'fields' => [
-            [
-                'field' => 'title',
-                'label' => __('Title'),
-                'type' => 'text',
-                'error' => ['escape' => false],
-                'div' => 'input clear',
-                'class' => 'input-xxlarge',
-            ],
-            [
-                'field' => 'value',
-                'label' => __('Value'),
-                'type' => 'text',
-                'error' => ['escape' => false],
-                'div' => 'input clear',
-                'class' => 'input-xxlarge'
-            ],
-        ],
-        'submit' => [
-            'action' => $this->request->params['action'],
-            'ajaxSubmit' => 'submitGenericFormInPlace();'
+            ]
         ]
     ]
-]);
+    );
+} else {
+    if ($thisUser == $this->request->data['PrivateSaveSearch']['user_id']) {
+        echo $this->element('genericElements/Form/genericForm', [
+            'data' => [
+                'title' => __('Edit Search Query'),
+                'fields' => [
+                    [
+                        'field' => 'title',
+                        'label' => __('Title'),
+                        'type' => 'text',
+                        'error' => ['escape' => false],
+                        'div' => 'input clear',
+                        'class' => 'input-xlarge',
+                    ],
+                    [
+                        'field' => 'value',
+                        'label' => __('Value'),
+                        'type' => 'text',
+                        'error' => ['escape' => false],
+                        'div' => 'input clear',
+                        'class' => 'input-xlarge'
+                    ]
+                ],
+                'submit' => [
+                    [
+                      'action' => $this->request->params['action'],
+                      'ajaxSubmit' => 'submitGenericFormInPlace();'
+                    ]
+
+                ]
+            ]
+        ]
+      );
+    } else {
+        echo "<h1 style= 'text-align:center;'> Error 403 - Forbidden </h1>";
+        echo "<h4 style= 'text-align:center;'> You do not have permission to edit this query. </h4>";
+    }
+}

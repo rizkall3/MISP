@@ -125,10 +125,15 @@
                 array(
                     'children' => array(
                         array(
-                            'title' => __('EMAIL HERE'),
+                            'title' => __('Share'),
                             'id' => 'share_query',
-                            'text' => __('SHARE'),
+                            'text' => __('Share'),
 
+                        ),
+                        array(
+                            'title' => __('Save'),
+                            'id' => 'save_query',
+                            'text' => __('Save'),
                         )
                     )
                 ),
@@ -169,6 +174,9 @@
         });
         $('#share_query').click(function() {
             openmailto();
+        });
+        $('#save_query').click(function() {
+            saveSearchQuery();
         });
     });
 </script>

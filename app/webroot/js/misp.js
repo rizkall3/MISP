@@ -2154,8 +2154,37 @@ function cancelSearch() {
     $('#quickFilterButton').click();
 }
 
-function openmailto() {
-    window.location='mailto:?subject=Search Query&body=Here is the search query: ' + window.location;
+function openmailto(url=null) {
+    if (url == null) {
+        window.open('mailto:?subject=Search Query&body=Here is the search query: ' + window.location, "_blank");
+    } else {
+        window.open('mailto:?subject=Search Query&body=Here is the search query: ' + url, "_blank");
+    }
+}
+
+function saveSearchQuery() {
+    var entireURL = baseurl + '/SaveSearch/add';
+    var fillInURL = "";
+
+    if (window.location != baseurl + '/SaveSearch') {
+        fillInURL = window.location;
+    }
+
+    $.ajax({
+        type: "get",
+        url: entireURL,
+        success: function (data) {
+            $('#genericModal').remove();
+            $('body').append(data);
+            $('#genericModal').modal().on('shown');
+            document.getElementById('SaveSearchValue').value = fillInURL;
+        },
+        error: function (data, textStatus, errorThrown) {
+            showMessage('fail', textStatus + ": " + errorThrown);
+        }
+    });
+
+
 }
 
 // Deprecated, when possible use runIndexQuickFilterFixed that is cleaner

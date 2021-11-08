@@ -177,12 +177,12 @@
                 'text' => __('Global Actions'),
                 'children' => array(
                     array(
-                        'text' => __('Save Search'),
-                        'url' => $baseurl . '/SaveSearch/index'
+                        'text' => __('Save Searches'),
+                        'url' => $baseurl . '/SaveSearch'
                     ),
                     array(
-                        'text' => __('Private Save Search'),
-                        'url' => $baseurl . '/PrivateSaveSearch/index'
+                        'text' => __('Private Save Searches'),
+                        'url' => $baseurl . '/PrivateSaveSearch'
                     ),
                     array(
                         'text' => __('News'),

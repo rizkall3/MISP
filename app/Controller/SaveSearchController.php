@@ -3,7 +3,6 @@ App::uses('AppController', 'Controller', 'CRUD');
 
 class SaveSearchController extends AppController
 {
-
     public $components = array('Session', 'RequestHandler');
 
     public $paginate = array(
@@ -13,6 +12,13 @@ class SaveSearchController extends AppController
             'SaveSearch.id' => 'DESC'
         ),
     );
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+
+        $thisUser = $this->Auth->user('id');
+        $this->set('thisUser', $thisUser);
+    }
 
     public function index()
     {
@@ -34,8 +40,10 @@ class SaveSearchController extends AppController
             if ($this->SaveSearch->save($this->request->data)) {
                 $this->Flash->success(__('Search Query added.'));
                 $this->redirect(array('action' => 'index'));
+                //$this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The search query could not be added.'));
+                //$this->redirect($this->referer());
             }
         }
     }
@@ -51,8 +59,10 @@ class SaveSearchController extends AppController
             if ($this->SaveSearch->save($this->request->data)) {
                 $this->Flash->success(__('Search Query updated.'));
                 $this->redirect(array('action' => 'index'));
+                //$this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('Could not update search query.'));
+                //$this->redirect($this->referer());
             }
         } else {
             $this->request->data = $this->SaveSearch->read(null, $id);

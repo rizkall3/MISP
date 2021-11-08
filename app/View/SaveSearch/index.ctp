@@ -1,32 +1,35 @@
 <?php
 
 $this->set('menuData', ['menuList' => 'savesearch', 'menuItem' => 'index']);
-
 echo $this->element('genericElements/IndexTable/scaffold', [
-        'scaffold_data' => [
-            'data' => [
-                'data' => $savedSearches,
-                'top_bar' => [
-                    'children' => [
-                        [
-                          'type' => 'simple',
-                          'children' => [
-                              [
-                                  'active' => $context === 'public',
-                                  'url' => $baseurl . '/SaveSearch/index',
-                                  'text' => __('Public'),
-                              ],
-                              [
-                                  'active' => $context === 'private',
-                                  'url' => $baseurl . '/PrivateSaveSearch/index',
-                                  'text' => __('Private'),
-                              ]
-
-                          ]
+    'scaffold_data' => [
+        'data' => [
+            'top_bar' => [
+                'children' => [
+                    [
+                        'children' => [
+                            [
+                                'active' => $context === 'public',
+                                'url' => $baseurl . '/SaveSearch',
+                                'text' => __('Public'),
+                            ],
+                            [
+                                'active' => $context === 'private',
+                                'url' => $baseurl . '/PrivateSaveSearch',
+                                'text' => __('Private'),
+                            ],
+                            [
+                                'onClick' => 'saveSearchQuery()',
+                                'title' => __('Add Query'),
+                                'text' => __('Add Search Query'),
+                                'pull' => 'right'
+                            ]
                         ]
                     ]
-                ],
-                'fields' => [
+                ]
+            ],
+            'data' => $savedSearches,
+            'fields' => [
                 [
                     'name' => __('Id'),
                     'sort' => 'id',
@@ -45,7 +48,8 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 [
                     'name' => __('Value'),
                     'sort' => 'value',
-                    'data_path' => 'SaveSearch.value'
+                    'data_path' => 'SaveSearch.value',
+                    'element' => 'links'
                 ],
                 [
                     'name' => __('Created at'),
@@ -58,23 +62,35 @@ echo $this->element('genericElements/IndexTable/scaffold', [
             'pull' => 'right',
             'actions' => [
                 [
-                    'url' => $baseurl . '/SaveSearch/edit',
-                    'url_params_data_paths' => [
-                        'SaveSearch.id'
-                    ],
+                    'onclick' => sprintf('openGenericModal(\'%s/SaveSearch/edit/[onclick_params_data_path]\');', $baseurl),
+                    'onclick_params_data_path' => 'SaveSearch.id',
                     'icon' => 'edit',
-                    'title' => 'Edit Query',
+                    'title' => __('Edit Query'),
+                    'complex_requirement' => [
+                        'function' => function($object) use($isSiteAdmin, $thisUser) {
+                            return $isSiteAdmin || ($thisUser == $object['SaveSearch']['user_id']);
+                        },
+                    ]
                 ],
                 [
-                    'onclick' => sprintf(
-                        'openGenericModal(\'%s/SaveSearch/delete/[onclick_params_data_path]\');',
-                        $baseurl
-                    ),
+                    'onclick' => sprintf('openGenericModal(\'%s/SaveSearch/delete/[onclick_params_data_path]\');', $baseurl),
                     'onclick_params_data_path' => 'SaveSearch.id',
                     'icon' => 'trash',
-                    'title' => __('Delete query'),
+                    'title' => __('Delete Query'),
+                    'complex_requirement' => [
+                        'function' => function($object) use($isSiteAdmin, $thisUser) {
+                            return $isSiteAdmin || ($thisUser == $object['SaveSearch']['user_id']);
+                        },
+                    ]
+                ],
+                [
+                    'onclick' => sprintf('openMailTo(\'[onclick_params_data_path]\');'),
+                    'onclick_params_data_path' => 'SaveSearch.value',
+                    'icon' => 'share',
+                    'title' => __('Share Query')
                 ]
             ]
         ]
     ]
-]);
+]
+);

@@ -18,6 +18,13 @@ class PrivateSaveSearchController extends AppController
         )
     );
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+
+        $thisUser = $this->Auth->user('id');
+        $this->set('thisUser', $thisUser);
+    }
+
     public function index()
     {
         /* Didn't work
@@ -109,8 +116,10 @@ class PrivateSaveSearchController extends AppController
             if ($this->PrivateSaveSearch->save($this->request->data)) {
                 $this->Flash->success(__('Search Query added.'));
                 $this->redirect(array('action' => 'index'));
+                //$this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The search query could not be added.'));
+                //$this->redirect($this->referer());
             }
         }
     }
@@ -126,8 +135,10 @@ class PrivateSaveSearchController extends AppController
             if ($this->PrivateSaveSearch->save($this->request->data)) {
                 $this->Flash->success(__('Search Query updated.'));
                 $this->redirect(array('action' => 'index'));
+                //$this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('Could not update search query.'));
+                //$this->redirect($this->referer());
             }
         } else {
             $this->request->data = $this->PrivateSaveSearch->read(null, $id);

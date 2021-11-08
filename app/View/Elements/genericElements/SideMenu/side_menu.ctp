@@ -1338,17 +1338,15 @@ $divider = $this->element('/genericElements/SideMenu/side_menu_divider');
                         'url' => $baseurl . '/SaveSearch/index',
                         'text' => __('View Saved Searches')
                     ));
-                    if ($isSiteAdmin) {
+                    echo $this->element('/genericElements/SideMenu/side_menu_link', array(
+                        'url' => $baseurl . '/SaveSearch/add',
+                        'text' => __('Add Search Query')
+                    ));
+                    if ($menuItem === 'edit') {
                         echo $this->element('/genericElements/SideMenu/side_menu_link', array(
-                            'url' => $baseurl . '/SaveSearch/add',
-                            'text' => __('Add Search Query')
+                            'element_id' => 'edit',
+                            'text' => __('Edit Search Query')
                         ));
-                        if ($menuItem === 'edit') {
-                            echo $this->element('/genericElements/SideMenu/side_menu_link', array(
-                                'element_id' => 'edit',
-                                'text' => __('Edit Search Query')
-                            ));
-                        }
                     }
                     break;
                 case 'privatesavesearch':
