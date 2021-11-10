@@ -18,6 +18,10 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                                     'url' => $baseurl . '/PrivateSaveSearch',
                                     'text' => __('Private'),
                                 ],
+                            ],
+                        ],
+                        [
+                            'children' => [
                                 [
                                     'onClick' => 'saveSearchQuery()',
                                     'title' => __('Add Query'),
