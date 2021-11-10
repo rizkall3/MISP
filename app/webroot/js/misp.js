@@ -2187,6 +2187,31 @@ function saveSearchQuery() {
 
 }
 
+function privateSaveSearchQuery() {
+    var entireURL = baseurl + '/PrivateSaveSearch/add';
+    var fillInURL = "";
+
+    if (window.location != baseurl + '/PrivateSaveSearch') {
+        fillInURL = window.location;
+    }
+
+    $.ajax({
+        type: "get",
+        url: entireURL,
+        success: function (data) {
+            $('#genericModal').remove();
+            $('body').append(data);
+            $('#genericModal').modal().on('shown');
+            document.getElementById('PrivateSaveSearchValue').value = fillInURL;
+        },
+        error: function (data, textStatus, errorThrown) {
+            showMessage('fail', textStatus + ": " + errorThrown);
+        }
+    });
+
+
+}
+
 // Deprecated, when possible use runIndexQuickFilterFixed that is cleaner
 function runIndexQuickFilter(preserveParams, url, target) {
     if (typeof passedArgsArray === "undefined") {

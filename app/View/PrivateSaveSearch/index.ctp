@@ -17,14 +17,15 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                                     'active' => $context === 'private',
                                     'url' => $baseurl . '/PrivateSaveSearch',
                                     'text' => __('Private'),
-                                ],
-                            ],
+                                ]
+                            ]
                         ],
                         [
                             'children' => [
                                 [
-                                    'onClick' => 'saveSearchQuery()',
+                                    //'onClick' => 'privateSaveSearchQuery()',
                                     'title' => __('Add Query'),
+                                    'id' => 'private_save_query',
                                     'text' => __('Add Search Query'),
                                     'pull' => 'right'
                                 ]
@@ -53,6 +54,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         'name' => __('Value'),
                         'sort' => 'value',
                         'data_path' => 'PrivateSaveSearch.value',
+                        'element' => 'links'
                     ],
                     [
                         'name' => __('Created at'),
@@ -95,4 +97,13 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 ]
             ]
         ]
-    ]);
+    ]
+);
+?>
+<script type="text/javascript">
+    $(function() {
+        $('#private_save_query').click(function() {
+            privateSaveSearchQuery();
+        });
+    });
+</script>
