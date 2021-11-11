@@ -131,10 +131,16 @@
 
                         ),
                         array(
-                            'title' => __('Save'),
+                            'title' => __('Public Save'),
                             'id' => 'save_query',
-                            'text' => __('Save'),
+                            'text' => __('Public Save'),
+                        ),
+                        array(
+                            'title' => __('Private Save'),
+                            'id' => 'private_save_query',
+                            'text' => __('Private Save'),
                         )
+
                     )
                 ),
                 array(
@@ -177,6 +183,9 @@
         });
         $('#save_query').click(function() {
             saveSearchQuery();
+        });
+        $('#private_save_query').click(function() {
+            privateSaveSearchQuery();
         });
     });
 </script>
