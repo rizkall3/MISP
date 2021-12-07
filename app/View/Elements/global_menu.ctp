@@ -177,10 +177,12 @@
                 'text' => __('Global Actions'),
                 'children' => array(
                     array(
+                      // Adds saveSearch page to global menu
                         'text' => __('Save Searches'),
                         'url' => $baseurl . '/SaveSearch'
                     ),
                     array(
+                      // Adds privateSaveSearch page to global menu
                         'text' => __('Private Save Searches'),
                         'url' => $baseurl . '/PrivateSaveSearch'
                     ),

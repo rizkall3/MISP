@@ -384,12 +384,14 @@ class ACLComponent extends Component
                     'delete' => array(),
                     'index' => array('*'),
             ),
+            // Permissions for savesearch page
             'saveSearch' => array (
                     'add' => array('perm_add'),
                     'edit' => array('perm_add'),
                     'delete' => array('perm_add'),
                     'index' => array('*'),
             ),
+            // Permissions for privatesavesearch page
             'privateSaveSearch' => array (
                     'add' => array('*'),
                     'edit' => array('*'),

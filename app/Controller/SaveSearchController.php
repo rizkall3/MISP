@@ -22,7 +22,7 @@ class SaveSearchController extends AppController
 
     public function index()
     {
-        $context = 'public';
+        $context = 'public'; // public page
         $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
         $savedSearches = $this->paginate();
 

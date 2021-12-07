@@ -1,4 +1,5 @@
 <?php
+// Add page for saving search queries to table
 $edit = $this->request->params['action'] === 'edit' ? true: false;
 
 if (!$edit) {

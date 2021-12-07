@@ -7,6 +7,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
             'top_bar' => [
                 'children' => [
                     [
+                      // Buttons for switching between public and private bookmarks
                         'children' => [
                             [
                                 'active' => $context === 'public',

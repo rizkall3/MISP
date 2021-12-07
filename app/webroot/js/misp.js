@@ -2186,7 +2186,7 @@ function saveSearchQuery() {
 
 
 }
-
+// Pulls up savesearchquery add page in small js menu
 function privateSaveSearchQuery() {
     var entireURL = baseurl + '/PrivateSaveSearch/add';
     var fillInURL = "";

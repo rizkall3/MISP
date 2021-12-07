@@ -7,6 +7,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 'top_bar' => [
                     'children' => [
                         [
+                          // Buttons for switching between public and private bookmarks
                             'children' => [
                                 [
                                     'active' => $context === 'public',
@@ -21,6 +22,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                             ]
                         ],
                         [
+                          // Pulls up save query page
                             'children' => [
                                 [
                                     //'onClick' => 'privateSaveSearchQuery()',
@@ -33,7 +35,9 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         ]
                     ]
                 ],
+                // sqldb to pull from
                 'data' => $privateSavedSearches,
+                // Names for columns
                 'fields' => [
                     [
                         'name' => __('Id'),
@@ -65,12 +69,14 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                 ],
                 'title' => empty($ajax) ? __('Your Saved Searches') : false,
                 'pull' => 'right',
+                // Actions for column buttons
                 'actions' => [
                     [
                         'onclick' => sprintf('openGenericModal(\'%s/PrivateSaveSearch/edit/[onclick_params_data_path]\');', $baseurl),
                         'onclick_params_data_path' => 'PrivateSaveSearch.id',
                         'icon' => 'edit',
                         'title' => __('Edit Query'),
+                        // Ensures only individual user access their own saved queries
                         'complex_requirement' => [
                             'function' => function($object) use($isSiteAdmin, $thisUser) {
                                 return $thisUser == $object['PrivateSaveSearch']['user_id'];
@@ -82,6 +88,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                         'onclick_params_data_path' => 'PrivateSaveSearch.id',
                         'icon' => 'trash',
                         'title' => __('Delete query'),
+                        // Ensures only individual user can delete their own saved queries
                         'complex_requirement' => [
                             'function' => function($object) use($isSiteAdmin, $thisUser) {
                                 return $thisUser == $object['PrivateSaveSearch']['user_id'];
@@ -101,6 +108,7 @@ echo $this->element('genericElements/IndexTable/scaffold', [
 );
 ?>
 <script type="text/javascript">
+    // Method for save search query button
     $(function() {
         $('#private_save_query').click(function() {
             privateSaveSearchQuery();

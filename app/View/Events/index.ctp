@@ -125,17 +125,20 @@
                 array(
                     'children' => array(
                         array(
+                          // Shares query through openMailTo()
                             'title' => __('Share'),
                             'id' => 'share_query',
                             'text' => __('Share'),
 
                         ),
                         array(
+                          // Saves query to public bookmarks
                             'title' => __('Public Save'),
                             'id' => 'save_query',
                             'text' => __('Public Save'),
                         ),
                         array(
+                          // Saves query to private bookmarks
                             'title' => __('Private Save'),
                             'id' => 'private_save_query',
                             'text' => __('Private Save'),
@@ -178,12 +181,15 @@
         $('#quickFilterButton').click(function() {
             runIndexQuickFilter(passedArgsArray);
         });
+        // Share search query through openMailTo()
         $('#share_query').click(function() {
             openmailto();
         });
+        // Saves query to public bookmarks
         $('#save_query').click(function() {
             saveSearchQuery();
         });
+        // Saves query to private bookmarks
         $('#private_save_query').click(function() {
             privateSaveSearchQuery();
         });
