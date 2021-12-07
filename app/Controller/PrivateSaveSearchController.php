@@ -21,10 +21,12 @@ class PrivateSaveSearchController extends AppController
     public function beforeFilter() {
         parent::beforeFilter();
 
+        // Sets thisUser to the user by id var from db
         $thisUser = $this->Auth->user('id');
         $this->set('thisUser', $thisUser);
     }
 
+    // Creates the individuality of privateSavedSearch page (unique to each user)
     public function index()
     {
         /* Didn't work
@@ -32,7 +34,7 @@ class PrivateSaveSearchController extends AppController
           $this->paginate['contain'] = array('User' => array('fields' => array('User.id', 'User.email')));
         }
         */
-        $context = 'private';
+        $context = 'private'; // private page
         $filterData = array(
             'request' => $this->request,
             'paramArray' => array('user_id', 'sort', 'direction', 'page', 'limit'),
@@ -73,8 +75,10 @@ class PrivateSaveSearchController extends AppController
 
         //$privateSavedSearches = $this->paginate();
 
+        // Set privateSavedSearches var to data from privateSavedSearches
         $this->set('privateSavedSearches', $privateSavedSearches);
         $this->set('context', empty($context) ? 'null' : $context);
+        // Loads user model
         $this->loadModel('User');
     }
     /* not used (possibly later)
