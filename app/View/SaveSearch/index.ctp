@@ -88,9 +88,10 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                     ]
                 ],
                 [
-                    'onclick' => sprintf('openMailTo(\'[onclick_params_data_path]\');'),
+                    //'onclick' => sprintf('openMailTo(\'[onclick_params_data_path]\');'),
                     'onclick_params_data_path' => 'SaveSearch.value',
                     'icon' => 'share',
+                    'id' => 'share_query',
                     'title' => __('Share Query')
                 ]
             ]
@@ -98,3 +99,11 @@ echo $this->element('genericElements/IndexTable/scaffold', [
     ]
 ]
 );
+?>
+<script type="text/javascript">
+    var passedArgsArray = <?php echo $passedArgs; ?>;
+    $(function() {
+        $('#share_query').click(function() {
+            openmailto('[onclick_params_data_path]');
+        });
+</script>
