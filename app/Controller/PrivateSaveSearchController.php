@@ -13,8 +13,8 @@ class PrivateSaveSearchController extends AppController
             'PrivateSaveSearch.id' => 'DESC'
         ),
         'contain' => array(
-          'User.id',
-          'User.email'
+            'User.id',
+            'User.email'
         )
     );
 
@@ -42,7 +42,7 @@ class PrivateSaveSearchController extends AppController
         );
         $exception = false;
         $filters = $this->_harvestParameters($filterData, $exception);
-        $conditons = array();
+        $conditions = array();
         if(!empty($filters['user_id'])) {
             $conditions['AND'][] = array(
                 'user_id' => $this->Auth->user('id')
@@ -67,18 +67,35 @@ class PrivateSaveSearchController extends AppController
                 $params['limit'] = $filters['limit'];
             }
             //$privateSavedSearch = $this
-            return $this->RestResponse->viewData($privateSaveSearches, $this->response->type());
+            return $this->RestResponse->viewData($privateSavedSearches, $this->response->type());
         } else {
-          $this->paginate['conditions'] = $conditions;
-          $privateSavedSearches = $this->paginate();
+            $this->paginate['conditions'] = $conditions;
+            $privateSavedSearches = $this->paginate();
         }
-
         //$privateSavedSearches = $this->paginate();
 
         // Set privateSavedSearches var to data from privateSavedSearches
         $this->set('privateSavedSearches', $privateSavedSearches);
         $this->set('context', empty($context) ? 'null' : $context);
         // Loads user model
+        $this->loadModel('User');
+
+
+        if (!empty($this->passedArgs['value'])) {
+            $search = $this->__search($this->passedArgs['value']);
+            $searchFixed = array();
+            foreach ($privateSavedSearches as $key => $value) {
+                if (in_array($privateSavedSearches[$key]['PrivateSaveSearch']['id'], $search, true)) {
+                    array_push($searchFixed, $privateSavedSearches[$key]);
+                }
+            }
+            $this->set('privateSavedSearches', $searchFixed);
+        }
+        else {
+            $this->set('privateSavedSearches', $privateSavedSearches);
+        }
+
+        $this->set('context', empty($context) ? 'null' : $context);
         $this->loadModel('User');
     }
     /* not used (possibly later)
@@ -158,5 +175,18 @@ class PrivateSaveSearchController extends AppController
         if ($this->IndexFilter->isRest()) {
             return $this->restResponsePayload;
         }
+    }
+
+    private function __search($value)
+    {
+        $value = mb_strtolower(trim($value));
+        $searchTerm = "%$value%";
+        $searchId = $this->PrivateSaveSearch->find('column', [
+            'fields' => ['PrivateSaveSearch.id'],
+            'conditions' => ['OR' => [
+                'LOWER(title) LIKE' => $searchTerm,
+            ]],
+        ]);
+        return $searchId;
     }
 }

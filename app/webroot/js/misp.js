@@ -48,7 +48,7 @@ function xhrFailCallback(xhr) {
     } else if (xhr.status === 403 || xhr.status === 405) {
         showMessage('fail', 'Not allowed.');
     } else if (xhr.status === 404) {
-        showMessage('fail', 'Resource not found.');
+        location.reload(false);
     } else {
         showMessage('fail', 'Something went wrong - the queried function returned an exception. Contact your administrator for further details.');
     }
@@ -906,6 +906,73 @@ function multiSelectDeleteEvents() {
     }).fail(xhrFailCallback);
 }
 
+
+function multiRemoveSaveEvents(){
+    var selected = [];
+    $(".select").each(function() {
+        var temp = $(this).data("id");
+        var formData = $('#removeTag_' + "favorite").serialize();
+        xhr({
+            data: formData,
+            type:"POST",
+            url: baseurl + "/events/removeTag/" + temp + '/' + "favorite",
+            success:function (data) {
+            },
+        });
+        if (temp != null) {
+            selected.push(temp);
+        }
+    });
+}
+
+function multiSelectSaveEvents() {
+    var selected = [];
+    $(".select").each(function() {
+        if ($(this).is(":checked")) {
+            var temp = $(this).data("id");
+
+            //quickSubmitTagForm("favorite", $(this).val());
+
+            var localFlag = '';
+            if (undefined != $(this)['local'] && $(this)['local']) {
+                localFlag = '/local:1';
+            }
+
+            var url = baseurl + "/events/addTag/" + temp + '/local:1';
+            fetchFormDataAjax(url, function(formData) {
+                $('body').append($('<div id="temp"/>').html(formData));
+                $('#temp #EventTag').val("favorite");
+                xhr({
+                    data: $('#EventAddTagForm').serialize(),
+                    success: function (data) {
+                        handleGenericAjaxResponse(data);
+                    },
+                    error: function() {
+                        showMessage('fail', 'Could not add tag.');
+                        loadEventTags(temp);
+                        loadGalaxies(temp, 'event');
+                    },
+                    complete: function() {
+                        $(".loading").hide();
+                        $("#confirmation_box").fadeOut();
+                        $("#gray_out").fadeOut();
+
+                    },
+                    type: "post",
+                    url: $('#EventAddTagForm').attr('action'),
+
+                });
+            });
+
+        }
+    });
+}
+
+function toggleFavoriteFeeds() {
+    $.get(baseurl + "/events/index/searchall:favorite/");
+}
+
+
 function multiSelectToggleFeeds(on, cache) {
     var selected = [];
     $(".select").each(function() {
@@ -1135,7 +1202,7 @@ function loadAttributeTags(id) {
         dataType:"html",
         cache: false,
         success:function (data) {
-            $("#Attribute_"+id+".attributeTagContainer").html(data);
+            $("#Attribute_"+id+"_tr .attributeTagContainer").html(data);
         },
         error: xhrFailCallback,
         url: baseurl + "/tags/showAttributeTag/" + id
@@ -2154,7 +2221,7 @@ function cancelSearch() {
     $('#quickFilterButton').click();
 }
 
-function openmailto(url=null) {
+function openMailTo(url=null) {
     if (url == null) {
         window.open('mailto:?subject=Search Query&body=Here is the search query: ' + window.location, "_blank");
     } else {
@@ -2162,6 +2229,7 @@ function openmailto(url=null) {
     }
 }
 
+// Pulls up savesearchquery add page in small js menu
 function saveSearchQuery() {
     var entireURL = baseurl + '/SaveSearch/add';
     var fillInURL = "";
@@ -2186,7 +2254,8 @@ function saveSearchQuery() {
 
 
 }
-// Pulls up savesearchquery add page in small js menu
+
+// Pulls up privatesavesearchquery add page in small js menu
 function privateSaveSearchQuery() {
     var entireURL = baseurl + '/PrivateSaveSearch/add';
     var fillInURL = "";

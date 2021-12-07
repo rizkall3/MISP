@@ -26,7 +26,20 @@ class SaveSearchController extends AppController
         $this->paginate['contain'] = array('User' => array('fields' => array('User.email')));
         $savedSearches = $this->paginate();
 
-        $this->set('savedSearches', $savedSearches);
+        if (!empty($this->passedArgs['value'])) {
+            $search = $this->__search($this->passedArgs['value']);
+            $searchFixed = array();
+            foreach ($savedSearches as $key => $value) {
+                if (in_array($savedSearches[$key]['SaveSearch']['id'], $search, true)) {
+                    array_push($searchFixed, $savedSearches[$key]);
+                }
+            }
+            $this->set('savedSearches', $searchFixed);
+        }
+        else {
+            $this->set('savedSearches', $savedSearches);
+        }
+
         $this->set('context', empty($context) ? 'null' : $context);
         $this->loadModel('User');
     }
@@ -80,6 +93,17 @@ class SaveSearchController extends AppController
         }
     }
 
-
+    private function __search($value)
+    {
+        $value = mb_strtolower(trim($value));
+        $searchTerm = "%$value%";
+        $searchId = $this->SaveSearch->find('column', [
+            'fields' => ['SaveSearch.id'],
+            'conditions' => ['OR' => [
+                'LOWER(title) LIKE' => $searchTerm,
+            ]],
+        ]);
+        return $searchId;
+    }
 
 }

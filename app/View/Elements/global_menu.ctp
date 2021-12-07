@@ -9,8 +9,8 @@
         $menu = array(
             array(
                 'type' => 'root',
-                'url' => empty($homepage['path']) ? $baseurl .'/' : $baseurl . h($homepage['path']),
-                'html' => Configure::read('MISP.home_logo') ? '<img src="' . $baseurl . '/img/custom/' . Configure::read('MISP.home_logo') . '" style="height:24px;" alt="' . __('Home') . '">' : __('Home'),
+                'url' => empty($homepage['path']) ? $baseurl : $baseurl . h($homepage['path']),
+                'html' => '<span class="logoBlueStatic bold" id="smallLogo">MISP</span>'
             ),
             array(
                 'type' => 'root',
@@ -21,17 +21,8 @@
                         'url' => $baseurl . '/events/index'
                     ),
                     array(
-                        'text' => __('Add Event'),
-                        'url' => $baseurl . '/events/add',
-                        'requirement' => $isAclAdd
-                    ),
-                    array(
                         'text' => __('List Attributes'),
                         'url' => $baseurl . '/attributes/index'
-                    ),
-                    array(
-                        'text' => __('Search Attributes'),
-                        'url' => $baseurl . '/attributes/search'
                     ),
                     array(
                         'type' => 'separator'
@@ -61,22 +52,12 @@
                         'url' => $baseurl . '/tag_collections/index'
                     ),
                     array(
-                        'text' => __('Add Tag'),
-                        'url' => $baseurl . '/tags/add',
-                        'requirement' => $isAclTagEditor
-                    ),
-                    array(
                         'text' => __('List Taxonomies'),
                         'url' => $baseurl . '/taxonomies/index'
                     ),
                     array(
                         'text' => __('List Templates'),
                         'url' => $baseurl . '/templates/index'
-                    ),
-                    array(
-                        'text' => __('Add Template'),
-                        'url' => $baseurl . '/templates/add',
-                        'requirement' => $isAclTemplate
                     ),
                     array(
                         'type' => 'separator'
@@ -191,14 +172,6 @@
                         'url' => $baseurl . '/news'
                     ),
                     array(
-                        'text' => __('My Profile'),
-                        'url' => $baseurl . '/users/view/me'
-                    ),
-                    array(
-                        'text' => __('My Settings'),
-                        'url' => $baseurl . '/user_settings/index/user_id:me'
-                    ),
-                    array(
                         'text' => __('Set Setting'),
                         'url' => $baseurl . '/user_settings/setSetting'
                     ),
@@ -206,10 +179,6 @@
                         'text' => __('Organisations'),
                         'url' => $baseurl . '/organisations/index',
                         'requirement' => $isAclSharingGroup || empty(Configure::read('Security.hide_organisation_index_from_users'))
-                    ),
-                    array(
-                        'text' => __('Role Permissions'),
-                        'url' => $baseurl . '/roles/index'
                     ),
                     array(
                         'type' => 'separator'
@@ -246,20 +215,8 @@
                         'type' => 'separator'
                     ),
                     array(
-                        'text' => __('User Guide'),
-                        'url' => 'https://www.circl.lu/doc/misp/'
-                    ),
-                    array(
                         'text' => __('Categories & Types'),
                         'url' => $baseurl . '/pages/display/doc/categories_and_types'
-                    ),
-                    array(
-                        'text' => __('Terms & Conditions'),
-                        'url' => $baseurl . '/users/terms'
-                    ),
-                    array(
-                        'text' => __('Statistics'),
-                        'url' => $baseurl . '/users/statistics'
                     ),
                     array(
                         'type' => 'separator'
@@ -298,11 +255,6 @@
                         'text' => __('List Feeds'),
                         'url' => $baseurl . '/feeds/index',
                         'requirement' => $canAccess('feeds', 'index'),
-                    ),
-                    array(
-                        'text' => __('Search Feed Caches'),
-                        'url' => $baseurl . '/feeds/searchCaches',
-                        'requirement' => $canAccess('feeds', 'searchCaches'),
                     ),
                     array(
                         'text' => __('List SightingDB Connections'),
@@ -352,11 +304,6 @@
                     array(
                         'text' => __('Set User Setting'),
                         'url' => $baseurl . '/user_settings/setSetting'
-                    ),
-                    array(
-                        'text' => __('Add User'),
-                        'url' => $baseurl . '/admin/users/add',
-                        'requirement' => $canAccess('users', 'admin_add'),
                     ),
                     array(
                         'text' => __('Contact Users'),
@@ -476,10 +423,6 @@
                         'url' => $baseurl . '/admin/audit_logs/index',
                         'requirement' => Configure::read('MISP.log_new_audit'),
                     ),
-                    array(
-                        'text' => __('Search Logs'),
-                        'url' => $baseurl . '/admin/logs/search'
-                    )
                 )
                     ),
             array(
@@ -499,64 +442,137 @@
             )
         );
         $menu_right = array(
+
             array(
                 'type' => 'root',
-                'url' => '#',
+                'url' => $baseurl . '/dashboards',
                 'html' => sprintf(
-                    '<span class="fas fa-star %s" id="setHomePage" title="%s" role="img" aria-label="%s" data-current-page="%s"></span>',
-                    (!empty($homepage['path']) && $homepage['path'] === $this->here) ? 'orange' : '',
-		    __('Set the current page as your home page in MISP'),
-		    __('Set the current page as your home page in MISP'),
-                    h($this->here)
+                    '<i class="fas fa-plus-square %s" role="img" aria-label="%s"></i>',
+                    (($notifications['total'] == 0) ? 'white' : 'red'),
+                    __('Notifications') . ': ' . $notifications['total']
+                ),
+                'children' => array(
+                    array(
+                        'text' => __('Add Event'),
+                        'url' => $baseurl . '/events/add',
+                        'requirement' => $isAclAdd
+                    ),
+                    array(
+                        'text' => __('Add Search'),
+                        'url' => $baseurl . '/SaveSearch/add',
+                        'requirement' => $isAclTemplate
+                    ),
+                    array(
+                        'text' => __('Add Tag'),
+                        'url' => $baseurl . '/tags/add',
+                        'requirement' => $isAclTagEditor
+                    ),
+                    array(
+                        'text' => __('Add Template'),
+                        'url' => $baseurl . '/templates/add',
+                        'requirement' => $isAclTemplate
+                    ),
+                    array(
+                        'text' => __('Add User'),
+                        'url' => $baseurl . '/admin/users/add',
+                        'requirement' => $canAccess('users', 'admin_add'),
+                    ),
                 )
             ),
             array(
                 'type' => 'root',
-                'url' => empty($homepage['path']) ? $baseurl : $baseurl . h($homepage['path']),
-                'html' => '<span class="logoBlueStatic bold" id="smallLogo">MISP</span>'
+                'url' => '#',
+                'html' => sprintf(
+                    '<span class="fas fa-search %s" role="img" aria-label="%s"></i>',
+                    (!empty($homepage['path']) && $homepage['path'] === $this->here) ? 'orange' : '',
+                    __(''),
+                    __('Search MISP'),
+                    h($this->here)
+                ),
+                'children' => array(
+                    array(
+                        'text' => __('Search Attributes'),
+                        'url' => $baseurl . '/attributes/search'
+                    ),
+                    array(
+                        'text' => __('Search Feed Caches'),
+                        'url' => $baseurl . '/feeds/searchCaches',
+                        'requirement' => $canAccess('feeds', 'searchCaches'),
+                    ),
+                    array(
+                        'text' => __('Search Logs'),
+                        'url' => $baseurl . '/admin/logs/search'
+                    )
+                )
             ),
             array(
                 'type' => 'root',
                 'url' => $baseurl . '/dashboards',
                 'html' => sprintf(
-                    '<span class="white" title="%s">%s%s&nbsp;&nbsp;&nbsp;%s</span>',
-                    h($me['email']),
-                    $this->UserName->prepend($me['email']),
-                    h($this->UserName->convertEmailToName($me['email'])),
-                    isset($notifications) ? sprintf(
-                        '<i class="fa fa-envelope %s" role="img" aria-label="%s"></i>',
-                        (($notifications['total'] == 0) ? 'white' : 'red'),
-                        __('Notifications') . ': ' . $notifications['total']
-                    ) : ''
+                    '<i class="fa fa-cog %s" role="img" aria-label="%s"></i>',
+                    (($notifications['total'] == 0) ? 'white' : 'red'),
+                    __('Notifications') . ': ' . $notifications['total']
+                ),
+                'children' => array(
+                    array(
+                        'text' => __('My Profile'),
+                        'url' => $baseurl . '/users/view/me'
+                    ),
+                    array(
+                        'text' => __('My Settings'),
+                        'url' => $baseurl . '/user_settings/index/user_id:me'
+                    ),
+                    array(
+                        'text' => __('Role Permissions'),
+                        'url' => $baseurl . '/roles/index'
+                    ),
+                    array(
+                        'type' => 'separator'
+                    ),
+                    array(
+                        'text' => __('User Guide'),
+                        'url' => 'https://www.circl.lu/doc/misp/'
+                    ),
+                    array(
+                        'text' => __('Terms & Conditions'),
+                        'url' => $baseurl . '/users/terms'
+                    ),
+                    array(
+                        'text' => __('Statistics'),
+                        'url' => $baseurl . '/users/statistics'
+                    ),
+                    array(
+                        'type' => 'separator'
+                    ),
+                    array(
+                        'url' => $baseurl . '/users/logout',
+                        'text' => __('Log out'),
+                        'requirement' => empty(Configure::read('Plugin.CustomAuth_disable_logout'))
+                    )
                 )
             ),
-            array(
-                'url' => $baseurl . '/users/logout',
-                'text' => __('Log out'),
-                'requirement' => empty(Configure::read('Plugin.CustomAuth_disable_logout'))
-            )
         );
     }
 ?>
 <div id="topBar" class="navbar navbar-inverse <?php echo $debugMode;?>">
-  <div class="navbar-inner">
-    <ul class="nav">
-        <?php
-        if (isset($menu)) {
-            foreach ($menu as $root_element) {
-                echo $this->element('/genericElements/GlobalMenu/global_menu_root', array('data' => $root_element));
+    <div class="navbar-inner">
+        <ul class="nav">
+            <?php
+            if (isset($menu)) {
+                foreach ($menu as $root_element) {
+                    echo $this->element('/genericElements/GlobalMenu/global_menu_root', array('data' => $root_element));
+                }
             }
-        }
-        ?>
-    </ul>
-    <ul class="nav pull-right">
-        <?php
+            ?>
+        </ul>
+        <ul class="nav pull-right">
+            <?php
             if (isset($menu_right)) {
                 foreach ($menu_right as $root_element) {
                     echo $this->element('/genericElements/GlobalMenu/global_menu_root', array('data' => $root_element));
                 }
             }
-        ?>
-    </ul>
-  </div>
+            ?>
+        </ul>
+    </div>
 </div>

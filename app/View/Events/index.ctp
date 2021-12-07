@@ -1,3 +1,4 @@
+<?php $this->Html->addCrumb('Events', '/events/index'); ?>
 <div class="events <?php if (!$ajax) echo 'index'; ?>">
     <h2><?php echo __('Events');?></h2>
     <div class="pagination">
@@ -70,6 +71,22 @@
                         )
                     )
                 ),
+
+
+
+                array(
+                    'children' => array(
+                        array(
+                            'title' => __('My events only'),
+                            'text' => __('Favorite Events'),
+                            'data' => array(
+                                'searchall' => "favorite"
+                            ),
+                            'class' => 'searchFilterButton',
+                            'active' => isset($passedArgsArray['email']) && $passedArgsArray['email'] === $me['email']
+                        ),
+                    )
+                ),
                 array(
                     'children' => array(
                         array(
@@ -118,6 +135,7 @@
                             'class' => 'last',
                             'title' => __('Choose columns to show'),
                             'fa-icon' => 'columns',
+                            'style'=>'color:#20b160',
                             'children' => $columnsMenu,
                         ),
                     ),
@@ -183,7 +201,7 @@
         });
         // Share search query through openMailTo()
         $('#share_query').click(function() {
-            openmailto();
+            openMailTo();
         });
         // Saves query to public bookmarks
         $('#save_query').click(function() {

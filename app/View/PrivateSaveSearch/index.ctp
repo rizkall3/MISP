@@ -32,6 +32,12 @@ echo $this->element('genericElements/IndexTable/scaffold', [
                                     'pull' => 'right'
                                 ]
                             ]
+                        ],
+                        [
+                            'type' => 'search',
+                            'button' => __('Filter'),
+                            'placeholder' => __('Enter value to search'),
+                            'searchKey' => 'value',
                         ]
                     ]
                 ],
